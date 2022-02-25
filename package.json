@@ -1,8 +1,8 @@
 {
-  "name": "freight-cotes-api",
+  "name": "delivery-quotations-api",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/brunohsweber/freight-cotes-api.git",
+  "repository": "https://github.com/brunohsweber/delivery-quotations-api.git",
   "author": "Bruno Weber <contato@brunoweber.com.br>",
   "license": "MIT",
   "scripts": {
