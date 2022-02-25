@@ -1,0 +1,11 @@
+{
+  "name": "freight-cotes-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/brunohsweber/freight-cotes-api.git",
+  "author": "Bruno Weber <contato@brunoweber.com.br>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "ts-node-dev --exit-child --transpile-only --ignore-watch node_modules src/server.ts"
+  }
+}
