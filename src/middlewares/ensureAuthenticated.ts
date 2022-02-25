@@ -24,7 +24,7 @@ export async function ensureAuthenticated(
   // [1] - 9494819519511-16516841 --> esse é o que precisa "token"
 
   try {
-    const { sub } = verify(token, HASH_JWT) as IPayload
+    const { sub } = verify(token, `${process.env.HASH_JWT_USER}`) as IPayload
 
     request.id_user = sub
 
