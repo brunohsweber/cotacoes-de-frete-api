@@ -6,7 +6,7 @@
   "author": "Bruno Weber <contato@brunoweber.com.br>",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --exit-child --transpile-only --ignore-watch node_modules src/server.ts"
+    "dev": "ts-node-dev --exit-child --poll --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
