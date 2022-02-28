@@ -20,11 +20,10 @@ export async function ensureAuthenticated(
 
   // Bearer 9494819519511-16516841
   const [, token] = authHeader.split(" ")
-  // [0] - Bearer
-  // [1] - 9494819519511-16516841 --> esse é o que precisa "token"
+  // [0] - Bearer --> ignorar / [1] - 9494819519511-16516841 "token" --> esse é o que precisa 
 
   try {
-    const { sub } = verify(token, `${process.env.HASH_JWT_USER}`) as IPayload
+    const { sub } = verify(token, "4bb1e7adfb1ef4005cd10aff564e1778") as IPayload
 
     request.id_user = sub
 
