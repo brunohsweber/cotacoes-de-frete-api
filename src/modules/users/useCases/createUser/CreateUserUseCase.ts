@@ -8,9 +8,6 @@ interface ICreateUser {
 
 export class CreateUserUseCase {
   async execute({ username, password }: ICreateUser) {
-    const isConnect = await prisma.$connect()
-
-    console.log(isConnect)
 
     const userExists = await prisma.users.findFirst({
       where: {
