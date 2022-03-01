@@ -3,10 +3,6 @@ import "express-async-errors"
 import dotenv from "dotenv";
 import { routes } from "./routes"
 
-dotenv.config({
-  path: process.env.NODE_ENV === "test" ? ".env.testing" : ".env"
-});
-
 const app = express()
 
 app.use(express.json())
@@ -24,4 +20,5 @@ app.use((err: Error, request: Request, response: Response, next: NextFunction) =
     message: "Internal server error"
   })
 })
-app.listen(3000, () => console.log("Server is running"))
+
+app.listen(3000, () => console.log("Server is running..."))
