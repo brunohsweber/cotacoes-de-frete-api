@@ -23,7 +23,7 @@ export async function ensureAuthenticated(
   // [0] - Bearer --> ignorar / [1] - 9494819519511-16516841 "token" --> esse é o que precisa 
 
   try {
-    const { sub } = verify(token, "4bb1e7adfb1ef4005cd10aff564e1778") as IPayload
+    const { sub } = verify(token, "da810830ccf26cc3fcfd19370bdb9c4b") as IPayload
 
     request.id_user = sub
 

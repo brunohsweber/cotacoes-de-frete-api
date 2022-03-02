@@ -9,24 +9,24 @@ interface IAuthenticateUser {
 
 export class AuthenticateUserUseCase {
   async execute({ username, password }: IAuthenticateUser) {
-    const client = await prisma.users.findFirst({
+    const user = await prisma.users.findFirst({
       where: {
         username
       }
     })
 
-    if (!client) {
+    if (!user) {
       throw new Error("Username or password invalid!")
     }
 
-    const passwordMatch = await compare(password, client.password)
+    const passwordMatch = await compare(password, user.password)
 
     if (!passwordMatch) {
       throw new Error("Username or password invalid!")
     }
 
     const token = sign({ username }, "da810830ccf26cc3fcfd19370bdb9c4b", {
-      subject: client.id,
+      subject: user.id,
       expiresIn: "1d"
     })
 
