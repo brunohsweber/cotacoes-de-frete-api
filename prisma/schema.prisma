@@ -1,0 +1,61 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id       String @id @default(uuid())
+  username String @unique @db.VarChar(30)
+  password String
+
+  quotations Quotations[]
+  @@map("users")
+}
+
+model Carries {
+  id   String @id @default(uuid())
+  name String @db.VarChar(50)
+  cnpj String @unique @db.VarChar(50)
+
+  quotations Quotations[]
+  @@map("carries")
+}
+
+model FreightType {
+  id          String @id @default(uuid())
+  description String @db.VarChar(50)
+
+
+  quotations Quotations[]
+  @@map("freight_type")
+}
+
+model Quotations {
+  id               String      @id @default(uuid())
+  id_user          String      @db.VarChar(36)
+  user             Users       @relation(fields: [id_user], references: [id])
+  id_carrier       String      @db.VarChar(36)
+  carrier          Carries     @relation(fields: [id_carrier], references: [id])
+  id_freight_type  String      @db.VarChar(36)
+  freight_type     FreightType @relation(fields: [id_freight_type], references: [id])
+  sender_name      String      @db.VarChar(50)
+  receiver_name    String      @db.VarChar(50)
+  reference_doc    Int
+  quotation_number Int?
+  price            Decimal     @db.Decimal(9, 2)
+  observations     String      @db.VarChar(50)
+  responsible      String      @db.VarChar(25)
+  has_confirmed    Boolean     @default(false)
+  has_paid         Boolean     @default(false)
+  created_at       DateTime    @default(now())
+  updated_at       DateTime?
+
+  @@map("quotations")
+}
