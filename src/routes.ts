@@ -1,4 +1,4 @@
-import { Request, Response, Router } from "express"
+import { Router } from "express"
 import { ensureAuthenticated } from "./middlewares/ensureAuthenticated";
 import { AuthenticateUserController } from "./modules/accounts/useCases/authenticateUser/AuthenticateUserController";
 import { CreateCarrierController } from "./modules/carries/useCases/createCarrier/CreateCarrierController";
@@ -12,15 +12,41 @@ const authenticateUserController = new AuthenticateUserController()
 const createCarrierController = new CreateCarrierController()
 const updateCarrierController = new UpdateCarrierController()
 
-/* Alias */
-routes.get("/", (request: Request, response: Response) => response.json({ message: "Hello World!!" }))
-
 // Users
 routes.post("/users", createUserController.handle)
 routes.post("/users/authenticate", authenticateUserController.handle)
 
 // Carries
 routes.post("/carries", ensureAuthenticated, createCarrierController.handle)
-routes.post("/carries/update/:id", ensureAuthenticated, updateCarrierController.handle)
+routes.put("/carries/:id", ensureAuthenticated, updateCarrierController.handle)
+
+// Quotations
+
+// Criar uma nova cotação
+routes.post("/quotations")
+
+// Listar todas
+routes.get("/quotations/all")
+
+// Listar pagas
+routes.get("/quotations/paid")
+
+// Listar em aberto
+routes.get("/quotations/open")
+
+// Listar por id - "detalhes"List 
+routes.get("/quotations/:id")
+
+// Atualizar uma cotação
+routes.put("/quotations/:id")
+
+// Atualizar uma cotação para confirmada
+routes.patch("/quotations/:id/confirm")
+
+// Atualizar uma cotação para paga
+routes.patch("/quotations/:id/pay")
+
+// Deletar
+routes.delete("/quotations/:id")
 
 export { routes };
