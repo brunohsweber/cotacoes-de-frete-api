@@ -31,7 +31,7 @@ model Carries {
 model FreightType {
   id          String @id @default(uuid())
   description String @db.VarChar(50)
-  
+
 
   quotations Quotations[]
   @@map("freight_type")
@@ -55,7 +55,7 @@ model Quotations {
   has_confirmed    Boolean     @default(false)
   has_paid         Boolean     @default(false)
   created_at       DateTime    @default(now())
-  updated_at       DateTime    @default(now())
+  updated_at       DateTime?
 
   @@map("quotations")
 }

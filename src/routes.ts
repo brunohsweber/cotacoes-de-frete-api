@@ -3,6 +3,7 @@ import { ensureAuthenticated } from "./middlewares/ensureAuthenticated";
 import { AuthenticateUserController } from "./modules/accounts/useCases/authenticateUser/AuthenticateUserController";
 import { CreateCarrierController } from "./modules/carries/useCases/createCarrier/CreateCarrierController";
 import { UpdateCarrierController } from "./modules/carries/useCases/updateCarrier/UpdateCarrierController";
+import { CreateQuotationController } from "./modules/quotations/useCases/createQuotation/CreateQuotationController";
 import { CreateUserController } from "./modules/users/useCases/createUser/CreateUserController";
 
 const routes = Router()
@@ -11,6 +12,7 @@ const createUserController = new CreateUserController()
 const authenticateUserController = new AuthenticateUserController()
 const createCarrierController = new CreateCarrierController()
 const updateCarrierController = new UpdateCarrierController()
+const createQuotationController = new CreateQuotationController()
 
 // Users
 routes.post("/users", createUserController.handle)
@@ -23,8 +25,9 @@ routes.put("/carries/:id", ensureAuthenticated, updateCarrierController.handle)
 // Quotations
 
 // Criar uma nova cotação
-routes.post("/quotations")
+routes.post("/quotations", ensureAuthenticated, createQuotationController.handle)
 
+/*
 // Listar todas
 routes.get("/quotations/all")
 
@@ -48,5 +51,6 @@ routes.patch("/quotations/:id/pay")
 
 // Deletar
 routes.delete("/quotations/:id")
+*/
 
 export { routes };
